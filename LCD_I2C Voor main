@@ -1,0 +1,54 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+//-----Hardware Adressierung-----
+//Bei falscher Funktion bitte obere Zeile auskommentieren,
+//und untere Zeile freigeben
+LiquidCrystal_I2C lcd(0x27,20,4);
+//LiquidCrystal_I2C lcd(0x27,20,4);
+
+//initialiseer aansluitingen
+const int knop = 8;
+const int relay = 2;
+void setup()
+{
+
+ //initialiseer aansluitingen 
+ Serial.begin(9600); 
+ lcd.init();
+ pinMode(knop, INPUT);
+ pinMode(relay, OUTPUT);
+
+ digitalWrite(relay, LOW);
+ digitalWrite(knop, LOW);
+
+}
+void loop()
+{
+ //print de uitslag van de knop
+ Serial.println(digitalRead(knop));
+
+ lcd.backlight();
+
+ //initialiseer LCD scherm
+ //Nachricht ausgeben
+  lcd.setCursor(0,0);
+  lcd.print(" Relay = uit");
+ delay(100);
+
+//zet relay aan als de knop wordt ingedrukt en print dit op het scherm
+ while(digitalRead(knop)){
+  digitalWrite(relay, HIGH);
+  lcd.setCursor(0,0);
+  lcd.print(" Relay = aan");
+  lcd.setCursor(0,1);
+  lcd.print(" Rij 2");
+ }
+
+ if(digitalRead(Groene_Knop)){
+
+ }
+
+  digitalWrite(relay, LOW);
+  lcd.setCursor(0,0);
+  lcd.print(" Relay = uit");
+}
