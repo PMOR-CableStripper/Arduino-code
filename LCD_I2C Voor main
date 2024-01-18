@@ -32,23 +32,55 @@ void loop()
  //initialiseer LCD scherm
  //Nachricht ausgeben
   lcd.setCursor(0,0);
-  lcd.print(" Relay = uit");
- delay(100);
+  lcd.print(" Welkom!")
+  lcd.setCursor(0,1);
+  lcd.print(" Wachten op startsignaal");
+ delay(10);
 
 //zet relay aan als de knop wordt ingedrukt en print dit op het scherm
- while(digitalRead(knop)){
+ /*while(digitalRead(knop)){
   digitalWrite(relay, HIGH);
   lcd.setCursor(0,0);
   lcd.print(" Relay = aan");
   lcd.setCursor(0,1);
   lcd.print(" Rij 2");
- }
+ }*/
 
  if(digitalRead(Groene_Knop)){
+  lcd.setCursor(0,0);
+  lcd.print(" Terug naar beginpositie")
+  lcd.setCursor(0, 1);
+  lcd.print(" ");
 
+  //plaats hier Code voor het teruglopen
+
+  if(digitalRead(eindschakelaar)){
+    lcd.setCursor(0,0);
+    lcd.print(" Op begindpositie ");
+    delay(1000ms);
+    lcd.setCursor(0,0);
+    lcd.print(" Lengtesnijden... ");
+    
+    //plaats hier code voor het lengtesnijden
+
+  }
+  lcd.setCursor(0,0);
+  lcd.print(" Klaar met lengtesnijden ");
+  delay(1000ms);
+  lcd.setCursor(0,0);
+  lcd.print(" Perifeersnijden...");
+
+  //plaats hier code voor het perifieëren
+
+  lcd.setCursor(0,0);
+  lcd.print(" Klaar met perifeersnijden");
+  digitalWrite(Groene_Knop) = 0;
  }
 
-  digitalWrite(relay, LOW);
+
+  /*digitalWrite(relay, LOW); // geeft relay uit weer op lcd
   lcd.setCursor(0,0);
-  lcd.print(" Relay = uit");
+  lcd.print(" Relay = uit");*/
 }
+
+
