@@ -76,28 +76,28 @@ void loop() {
   Serial.print("Wachten op startsignaal\n");
   while(!digitalRead(knop));
 
-  digitalWrite(Sleep, HIGH);
-  
   Serial.print("Terug naar beginpositie\n");
   while(!digitalRead(beginschakelaar)){
     stepper.move(-48);
   }  
   delay(100);
   Serial.print("Op beginpositie // beginnen met lengtesnijden\n");
-  
-  for(int i=0; i<480; i++){
-    stepper.move(48);
+  int aantalRondjes = 10;
+  for(int i=0; i<aantalRondjes; i++){
+    stepper.move(1080*16);
   }
   Serial.print("Klaar met lengtesnijden\n");
 
-  delay(2000);
-  digitalWrite(Sleep_2, HIGH);
+  delay(100);
 
   Serial.print("Beginnen met perifeersnijden\n");
-  for(int i=0; i<32; i++){
+  aantalRondjes = 5;
+  for(int i=0; i<aantalRondjes; i++){
     stepper_2.move(1080*16);
-    Serial.print("bezig met perifeer\n");
   }
-
+  for(int i=0; i<aantalRondjes; i++){
+    stepper_2.move(-1080*16);
+  }
+  
   Serial.print("Klaar met perifeersnijden\n");
-}
+  }
